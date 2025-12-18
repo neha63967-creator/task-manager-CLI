@@ -3,7 +3,14 @@ import java.util.*;
 public class task_manager {
 
     // Feature methods will be added by team members
-    public static void addTask(String task) {}
+public static void addTask(String task) {
+    try (java.io.FileWriter fw = new java.io.FileWriter("tasks.txt", true)) {
+        fw.write(task + "\n");
+        System.out.println("Task added successfully.");
+    } catch (Exception e) {
+        System.out.println("Error adding task.");
+    }
+}
     public static void showTasks() {}
     public static void deleteTask(String task) {}
 
