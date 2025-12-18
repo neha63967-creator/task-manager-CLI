@@ -4,7 +4,20 @@ public class task_manager {
 
     // Feature methods will be added by team members
     public static void addTask(String task) {}
-    public static void showTasks() {}
+    public static void showTasks() {
+        try (Scanner file = new Scanner(new java.io.File("tasks.txt"))) {
+        int i = 1;
+        while (file.hasNextLine()) {
+            System.out.println(i + ". " + file.nextLine());
+            i++;
+        }
+        if (i == 1) {
+            System.out.println("No tasks found.");
+        }
+    } catch (Exception e) {
+        System.out.println("Error reading file.");
+    }
+    }
     public static void deleteTask(String task) {}
 
     public static void main(String[] args) {
