@@ -4,33 +4,21 @@ public class task_manager {
 
     // Feature methods will be added by team members
     public static void addTask(String task) {}
-    public static void showTasks() {}
-   public static void deleteTask(String taskToDelete) {
-    try {
-        java.io.File input = new java.io.File("tasks.txt");
-        java.io.File temp = new java.io.File("temp.txt");
-
-        Scanner sc = new Scanner(input);
-        java.io.PrintWriter pw = new java.io.PrintWriter(temp);
-
-        while (sc.hasNextLine()) {
-            String line = sc.nextLine();
-            if (!line.equalsIgnoreCase(taskToDelete)) {
-                pw.println(line);
-            }
+    public static void showTasks() {
+        try (Scanner file = new Scanner(new java.io.File("tasks.txt"))) {
+        int i = 1;
+        while (file.hasNextLine()) {
+            System.out.println(i + ". " + file.nextLine());
+            i++;
         }
-
-        sc.close();
-        pw.close();
-
-        input.delete();
-        temp.renameTo(input);
-
-        System.out.println("Task deleted.");
+        if (i == 1) {
+            System.out.println("No tasks found.");
+        }
     } catch (Exception e) {
-        System.out.println("Error deleting task.");
+        System.out.println("Error reading file.");
     }
-}
+    }
+    public static void deleteTask(String task) {}
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
